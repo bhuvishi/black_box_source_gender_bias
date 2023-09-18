@@ -32,8 +32,8 @@ def get_statistics_from_results(results):
         elif gender_bias.is_male(result['token_str']):
             male_score = result['score']
     ratio = male_score / female_score
-    if ratio > 1000:
-        print("the ratio is very odd for ",  results)
+    #if ratio > 1000:
+    #    print("the ratio is very odd for ",  results)
     return ratio
 
 

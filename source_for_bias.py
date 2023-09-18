@@ -75,8 +75,9 @@ class WordsCausingBias(object):
                 'mean': np.mean(results),
                 'median': np.median(results)})
 
-        
-        with open(os.path.join(data_path, model_checkpoint + str(records_processed) + '_scores.csv'), 'w', newline='') as out_file:
+        out_file_path = os.path.join(data_path, model_checkpoint + str(records_processed) + '_scores.csv')
+        print('outputting to ', out_file_path)
+        with open(out_file_path, 'w', newline='') as out_file:
             score_writer = csv.DictWriter(out_file, fieldnames=['word', 'median', 'mean', 'count'])
             score_writer.writeheader()
             for score_statistic in sorted(score_statistics, key=lambda x: x['median']):
@@ -90,8 +91,8 @@ class WordsCausingBias(object):
 
 
 def main():
-    data_mangler_save_path = '/Users/geetb/fixed_uncased_nlp_out_vocab_1000_20000_dataset_examples_200K/'
-    model_checkpoint = 'distilbert-base-uncased'
+    data_mangler_save_path = '/Users/geetb/fixed_uncased_nlp_out_vocab_size_1000_dataset_examples_100K/'
+    model_checkpoint = 'ahmedrachid/FinancialBERT'
     # tokenizer = BertTokenizer.from_pretrained(model_checkpoint)
     WordsCausingBias(model_checkpoint=model_checkpoint, data_path=data_mangler_save_path)
 
