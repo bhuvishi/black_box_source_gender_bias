@@ -6,6 +6,7 @@ import os
 import sys
 import traceback
 from datetime import datetime
+import scores_file_constants
 
 
 # from transformers import BertTokenizer
@@ -78,7 +79,7 @@ class WordsCausingBias(object):
         out_file_path = os.path.join(data_path, model_checkpoint + str(records_processed) + '_scores.csv')
         print('outputting to ', out_file_path)
         with open(out_file_path, 'w', newline='') as out_file:
-            score_writer = csv.DictWriter(out_file, fieldnames=['word', 'median', 'mean', 'count'])
+            score_writer = csv.DictWriter(out_file, fieldnames=scores_file_constants.FIELD_NAMES)
             score_writer.writeheader()
             for score_statistic in sorted(score_statistics, key=lambda x: x['median']):
                 score_writer.writerow(score_statistic)
